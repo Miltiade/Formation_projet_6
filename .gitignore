@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+#OCMovies-API-EN-FR-master directory and files
+OCMovies-API-EN-FR-master/*
+
+# virtualenv directories
+env/
