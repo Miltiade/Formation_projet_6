@@ -1,3 +1,5 @@
+# Follow the guidelines in github_copilot_custom_instructions.md
+
 Étapes
 
 1. Faites fonctionner l'API OCMovies

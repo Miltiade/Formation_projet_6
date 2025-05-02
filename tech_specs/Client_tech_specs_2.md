@@ -1,3 +1,5 @@
+# Follow the guidelines in github_copilot_custom_instructions.md
+
 Interface du site
 
 L’interface doit comprendre les zones suivantes :

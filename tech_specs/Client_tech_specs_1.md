@@ -1,3 +1,5 @@
+# Follow the guidelines in github_copilot_custom_instructions.md
+
 Comme tu le sais, notre objectif est de développer un site web qui permettra à nos abonnés de visualiser en temps réel des films intéressants. 
 
 Pour la partie technique, je te donne en pièce jointe le cahier des charges que mon collaborateur Éric a rédigé.

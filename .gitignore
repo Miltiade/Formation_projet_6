@@ -1,3 +1,5 @@
+# Follow the guidelines in github_copilot_custom_instructions.md
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
