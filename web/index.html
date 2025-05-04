@@ -1,93 +1,244 @@
 <!-- Follow the guidelines in github_copilot_custom_instructions.md -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OCMovies</title>
+    <title>JustStreamIt -- Vidéos à la demande</title>
 </head>
 <body>
     <!-- Header Section -->
     <header>
-        <h1>OCMovies</h1>
+        <img src="https://via.placeholder.com/800x200?text=JustStreamIt+--+Vidéos+à+la+demande" alt="JustStreamIt -- Vidéos à la demande">
     </header>
 
     <!-- Best Movie Section -->
     <section id="best-movie">
-        <h2>Best Movie</h2>
+        <h2>Meilleur film</h2>
         <article>
             <img src="https://picsum.photos/200/300" alt="Best Movie Placeholder">
-            <h3>Movie Title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Titre du film</h3>
+            <p>Description du film.</p>
+            <p><button>Détails</button></p>
         </article>
     </section>
 
     <!-- Best rated movies section -->
     <section id="best-rated">
-        <h2>Best Rated Movies</h2>
+        <h2>Films les mieux notés</h2>
         <ul>
             <li>
                 <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Movie Title 1</p>
+                <p>Titre du film 1</p>
+                <p><button>Détails</button></p>
             </li>
             <li>
                 <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Movie Title 2</p>
+                <p>Titre du film 2</p>
+                <p><button>Détails</button></p>
             </li>
             <li>
                 <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Movie Title 3</p>
+                <p>Titre du film 3</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 4</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 5</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 6</p>
+                <p><button>Détails</button></p>
             </li>
         </ul>
     
     <!-- Categories Section -->
     <section id="categories">
-        <h2>Categories</h2>
+        <h2></h2>
 
         <!-- Category 1: MYSTERY -->
         <div class="category">
-            <h3>Category 1</h3>
+            <h3>Mystery</h3>
             <ul>
-                <li>
-                    <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                    <p>Movie Title 1</p>
-                </li>
-                <li>
-                    <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                    <p>Movie Title 2</p>
-                </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 1</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 2</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 3</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 4</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 5</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 6</p>
+                <p><button>Détails</button></p>
+            </li>
             </ul>
         </div>
 
         <!-- Category 2 -->
         <div class="category">
-            <h3>Category 2</h3>
+            <h3>Catégorie 2</h3>
+            <ul>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 1</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 2</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 3</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 4</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 5</p>
+                <p><button>Détails</button></p>
+            </li>
+            <li>
+                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                <p>Titre du film 6</p>
+                <p><button>Détails</button></p>
+            </li>
+            </ul>
+        </div>
+
+        <!-- (category 3) OTHERS -->
+        <div class="category">
+            <h3>Autres:</h3>
+            <button onclick="toggleDropdown()">Menu déroulant</button>
+            <div id="dropdown-menu" style="display: none;">
+                <ul>
+                    <li>Films d'action</li>
+                    <li>Comédies</li>
+                    <li>Famille</li>
+                    <li>Films de fantasy</li>
+                    <li>Films d'horreur</li>
+                    <li>Science-fiction</li>
+                    <li>Westerns</li>
+                </ul>
+            </div>
+            <script>
+                function toggleDropdown() {
+                    const menu = document.getElementById('dropdown-menu');
+                    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+                }
+            </script>
             <ul>
                 <li>
                     <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                    <p>Movie Title 1</p>
+                    <p>Titre du film 1</p>
+                    <p><button>Détails</button></p>
                 </li>
                 <li>
                     <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                    <p>Movie Title 2</p>
+                    <p>Titre du film 2</p>
+                    <p><button>Détails</button></p>
+                </li>
+                <li>
+                    <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                    <p>Titre du film 3</p>
+                    <p><button>Détails</button></p>
+                </li>
+                <li>
+                    <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                    <p>Titre du film 4</p>
+                    <p><button>Détails</button></p>
+                </li>
+                <li>
+                    <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                    <p>Titre du film 5</p>
+                    <p><button>Détails</button></p>
+                </li>
+                <li>
+                    <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                    <p>Titre du film 6</p>
+                    <p><button>Détails</button></p>
                 </li>
             </ul>
         </div>
 
-        <!-- Category 3: OTHERS -->
+        <!-- (category 4) OTHERS -->
         <div class="category">
-            <h3>Category 3</h3>
+            <h3>Autres:</h3>
+            <button onclick="toggleDropdown()">Menu déroulant</button>
+            <div id="dropdown-menu" style="display: none;">
+                <ul>
+                    <li>Films d'action</li>
+                    <li>Comédies</li>
+                    <li>Famille</li>
+                    <li>Films de fantasy</li>
+                    <li>Films d'horreur</li>
+                    <li>Science-fiction</li>
+                    <li>Westerns</li>
+                </ul>
+            </div>
+            <script>
+                function toggleDropdown() {
+                    const menu = document.getElementById('dropdown-menu');
+                    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+                }
+            </script>
             <ul>
                 <li>
                     <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                    <p>Movie Title 1</p>
+                    <p>Titre du film 1</p>
+                    <p><button>Détails</button></p>
                 </li>
                 <li>
                     <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                    <p>Movie Title 2</p>
+                    <p>Titre du film 2</p>
+                    <p><button>Détails</button></p>
                 </li>
-            </ul>
+                <li>
+                    <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                    <p>Titre du film 3</p>
+                    <p><button>Détails</button></p>
+                </li>
+                <li>
+                    <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                    <p>Titre du film 4</p>
+                    <p><button>Détails</button></p>
+                </li>
+                <li>
+                    <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
+                    <p>Titre du film 5</p>
+
     </section>
 </body>
 </html>
