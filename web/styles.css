@@ -1,0 +1,63 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set a font and background for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Style the header */
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Style sections */
+section {
+    margin: 1rem auto;
+    padding: 1rem;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style images */
+img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.category {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.category-item {
+    flex: 1 1 calc(33.333% - 1rem);
+    background-color: #eaeaea;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.category-item:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
