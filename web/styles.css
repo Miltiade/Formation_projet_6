@@ -8,14 +8,14 @@
 /* Set a font and background for the entire page */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: white;
     color: #333;
     line-height: 1.6;
 }
 
 /* Style the header */
 header {
-    background-color: #333;
+    background-color: grey;
     color: white;
     padding: 1rem;
     text-align: center;
@@ -38,7 +38,7 @@ img {
 }
 
 h1, h2 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 1rem;
 }
 
