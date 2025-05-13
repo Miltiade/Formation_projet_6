@@ -39,6 +39,7 @@ function displayBestMovie(movie) {
 
     // Update the HTML content of the best movie section with the movie details
     bestMovieSection.innerHTML = `
+        <h1>Meilleur film</h1>
         <h1>${title}</h1>
         <img src="${imageUrl}" alt="${title}">
         <p>${description}</p>
