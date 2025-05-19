@@ -142,7 +142,7 @@ function displayCat2Movies(movies) {
     const topRatedSection = document.getElementById("category-2");
 
     // Clear any existing content in the section exept the title
-    topRatedSection.innerHTML = "<h1>Catégorie 2</h1>";
+    topRatedSection.innerHTML = "<h1>Action</h1>";
 
     // Loop through each movie and create HTML elements to display them
     movies.forEach(movie => {
