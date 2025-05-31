@@ -76,10 +76,12 @@ function displayBestMovie(movie) {
     // Update the HTML content of the best movie section with the movie details
     bestMovieSection.innerHTML = `
         <h1>Meilleur film</h1>
-        <h1>${title}</h1>
-        <img src="${imageUrl}" alt="${title}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG';">
-        <p>${description}</p>
-        <button>Détails</button>
+        <div class="best-movie-container">
+            <h2 class="movie-title">${title}</h2>
+            <img class="movie-image" src="${imageUrl}" alt="${title}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG';">
+            <p class="movie-description">${description}</p>
+            <button class="movie-details-btn">Détails</button>
+        </div>
     `;
 }
 
@@ -87,7 +89,7 @@ function displayBestRatedMovies(movies) {
     // Get the HTML element where the best rated movies will be displayed
     const topRatedSection = document.getElementById("best-rated");
 
-    // Clear any existing content in the section exept the title
+    // Clear any existing content in the section except the title
     topRatedSection.innerHTML = "<h1>Films les mieux notés</h1>";
 
     // Loop through each movie and create HTML elements to display them
