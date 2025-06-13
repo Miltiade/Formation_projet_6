@@ -16,7 +16,9 @@ body {
     line-height: 1.6;
 }
 
-/* Style the header */
+/* =========================
+   HEADER STYLES
+   ========================= */
 header {
     display: flex;
     flex-direction: column;
@@ -30,7 +32,9 @@ header {
     background-color: grey;
 }
 
-/* Style sections */
+/* =========================
+   SECTION STYLES
+   ========================= */
 section {
     margin: 1rem auto;
     padding: 1rem;
@@ -40,37 +44,138 @@ section {
     border-radius: 5px;
 }
 
-/* Style the best-movie section */
+/* =========================
+   BEST MOVIE SECTION
+   ========================= */
 .best-movie {
     display: flex;
     flex-direction: column;
 }
 
-/* Style div class="best-movie-container" */
+/* Grid layout for best-movie-container:
+   - 2 columns: image (left), info (right)
+   - 3 rows for right column: title, details, button
+*/
 .best-movie-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid; /* Enable grid layout */
+    grid-template-columns: 1fr 2fr; /* 2 columns: left is 1 part, right is 2 parts */
+    grid-template-rows: auto auto auto; /* 3 rows for the right column */
+    gap: 1rem; /* Space between grid cells */
     margin: 1rem auto;
     padding: 1rem;
     max-width: 100%;
     min-width: 70%;
-    background-color: #f0f0f0;
     border-radius: 5px;
     border: 4px solid black;
+    /* background-color: white; */
 }
 
-/* Style images */
+/* Left column: image spans all 3 rows */
+.col1 {
+  grid-row: 1 / span 3;
+  font-weight: bold;
+  padding: 12px;
+}
+
+/* Right column: each row */
+.col2 {
+  padding: 12px;
+}
+
+/* Style for the details button in best-movie */
+.col2 .movie-details-btn {
+    display: block;
+    margin-left: auto;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Image container for best-movie (left column) */
+.best-movie-image {
+    grid-column: 1 / 2;
+    grid-row: 1 / 4;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+/* Make the image fill its container vertically */
+.best-movie-image img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Title styling for best-movie (top right) */
+.best-movie-title {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    text-align: center;
+    align-self: start;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Details styling for best-movie (middle right) */
+.best-movie-details {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    align-self: start;
+    margin-bottom: 0.5rem;
+}
+
+/* Button styling for best-movie (bottom right) */
+.best-movie-actions {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    align-self: end;
+    justify-self: end;
+}
+
+/* =========================
+   BEST RATED MOVIES GRID
+   ========================= */
+/* Grid layout: 3 columns, 2 rows for movie boxes */
+.best-rated-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 2rem auto;
+    max-width: 100%;
+    min-width: 70%;
+    width: 100%;
+    height: 570px; /* 2 x movie-box height + gap; adjust as needed */
+    align-items: stretch;
+}
+
+/* =========================
+   GENERAL IMAGE STYLES
+   ========================= */
 img {
     max-width: 100%;
     border-radius: 5px;
 }
 
+/* =========================
+   HEADINGS
+   ========================= */
 h1, h2 {
     text-align: left;
     margin-bottom: 1rem;
 }
 
+/* =========================
+   CATEGORY STYLES
+   ========================= */
 .category {
     display: flex;
     flex-wrap: wrap;
@@ -89,4 +194,88 @@ h1, h2 {
 .category-item:hover {
     background-color: #ddd;
     cursor: pointer;
+}
+
+/* =========================
+   MOVIE BOX STYLES
+   ========================= */
+.movie-box {
+    position: relative;
+    background: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    height: 270px; /* Height of each movie box */
+    min-height: 220px;
+    padding: 0;
+    transition: box-shadow 0.2s;
+}
+
+/* Movie image fills the box */
+.movie-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1;
+}
+
+/* Header overlay on movie image */
+.movie-box-header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 8px;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    height: 33%;
+    min-height: 60px;
+    background: rgba(30, 30, 30, 0.50);
+    border-radius: 12px 12px 32px 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0.7em 1em 0.7em 1em;
+    z-index: 2;
+}
+
+/* Movie title in header */
+.movie-box-title {
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: bold;
+    align-self: flex-start;
+    margin: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Détails button in header */
+.movie-box-details-btn {
+    align-self: flex-end;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8em 2.4em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    transition: background 0.2s;
+}
+.movie-box-details-btn:hover {
+    background: #333;
 }

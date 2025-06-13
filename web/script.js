@@ -77,38 +77,42 @@ function displayBestMovie(movie) {
     bestMovieSection.innerHTML = `
         <h1>Meilleur film</h1>
         <div class="best-movie-container">
-            <h2 class="movie-title">${title}</h2>
-            <img class="movie-image" src="${imageUrl}" alt="${title}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG';">
-            <p class="movie-description">${description}</p>
-            <button class="movie-details-btn">Détails</button>
+            <div class="col1" rowspan ="3">
+                <img class="movie-image" src="${imageUrl}" alt="${title}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG';">
+            </div>
+            <div class="col2"><h2 class="movie-title">${title}</h2></div>
+            <div class="col2"><p class="movie-description">${description}</p></div>
+            <div class="col2"><button class="movie-details-btn">Détails</button></div>
         </div>
     `;
 }
 
 function displayBestRatedMovies(movies) {
-    // Get the HTML element where the best rated movies will be displayed
     const topRatedSection = document.getElementById("best-rated");
-
-    // Clear any existing content in the section except the title
     topRatedSection.innerHTML = "<h1>Films les mieux notés</h1>";
 
-    // Loop through each movie and create HTML elements to display them
+    // Create a single container for the grid
+    const container = document.createElement("div");
+    container.classList.add("best-rated-container");
+
     movies.forEach(movie => {
-        const title = movie.title || "Titre non disponible"; // Default title if not available
-        const imageUrl = movie.image_url || "https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG"; // Default image if not available
+        const title = movie.title || "Titre non disponible";
+        const imageUrl = movie.image_url || "https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG";
 
-        // Create a new div for each movie with its details
         const movieDiv = document.createElement("div");
-        movieDiv.classList.add("movie");
-        movieDiv.innerHTML = `            
-            <h2>${title}</h2>
+        movieDiv.classList.add("movie-box");
+        movieDiv.innerHTML = `
             <img src="${imageUrl}" alt="${title}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG';">
-            <button>Détails</button>
+            <div class="movie-box-header">
+                <span class="movie-box-title">${title}</span>
+                <button class="movie-box-details-btn">Détails</button>
+            </div>
         `;
-
-        // Append the new movie div to the top-rated section
-        topRatedSection.appendChild(movieDiv);
+        container.appendChild(movieDiv);
     });
+
+    // Append the grid container to the section
+    topRatedSection.appendChild(container);
 }
 
 // Fonction "displayCat1Movies" : affiche les 6 films les mieux notés de la catégorie 1 ("Mystery")
