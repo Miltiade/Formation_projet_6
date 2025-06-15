@@ -82,18 +82,23 @@ section {
   padding: 12px;
 }
 
-/* Style for the details button in best-movie */
-.col2 .movie-details-btn {
-    display: block;
-    margin-left: auto;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
-    background-color: red;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+/* Shared button style for all movie details and modal close buttons */
+.movie-details-button {
+  background-color: #d32f2f;   /* Red background */
+  color: #fff;                 /* White text */
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0.5em 0;
+  font-weight: bold;
+}
+
+/* Optional: hover effect for feedback */
+.movie-details-button:hover {
+  background-color: #b71c1c;
 }
 
 /* Image container for best-movie (left column) */
@@ -262,7 +267,7 @@ h1, h2 {
 }
 
 /* Détails button in header */
-.movie-box-details-btn {
+.movie-box-details-button {
     align-self: flex-end;
     background: #111;
     color: #fff;
@@ -276,6 +281,49 @@ h1, h2 {
     box-shadow: 0 1px 4px rgba(0,0,0,0.2);
     transition: background 0.2s;
 }
-.movie-box-details-btn:hover {
+.movie-box-details-button:hover {
     background: #333;
+}
+
+/* Modal styles */
+/* filepath: web/styles.css */
+/* =========================
+    MODAL STYLES
+    ========================= */
+
+/* Modal overlay: covers the entire viewport with a semi-transparent background */
+.modal {
+  position: fixed; /* Stay fixed on the screen */
+  z-index: 1000; /* Appear above most other elements */
+  left: 0; top: 0; width: 100vw; height: 100vh; /* Full viewport */
+  background: rgba(0,0,0,0.7); /* Dark transparent background */
+  display: flex; /* Center modal content */
+  align-items: center; 
+  justify-content: center;
+}
+
+/* Modal content box: centered, white background, rounded corners */
+.modal-content {
+  background: #fff; /* White background */
+  padding: 2em; /* Space inside modal */
+  border-radius: 10px; /* Rounded corners */
+  max-width: 500px; /* Maximum width */
+  width: 90vw; /* Responsive width */
+  /* Add a thick black border */
+  border: 8px solid #000;
+  max-height: 90vh; /* Prevent overflow off screen */
+  overflow-y: auto; /* Scroll if content is too tall */
+  position: relative; /* For positioning close button */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center children horizontally */
+}
+
+/* Close button: positioned in the bottom center of modal */
+.modal-close {
+    position: static; /* No absolute positioning needed */
+    margin-top: auto; /* Pushes the button to the bottom in flex column */
+    margin-bottom: 1em; /* Adds space below the button */
+    align-self: center; /* Center horizontally in flexbox */
+    font-size: 2em; /* Large size for visibility */
 }
