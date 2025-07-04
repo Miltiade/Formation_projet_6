@@ -64,30 +64,26 @@ function fetchMovieDetails(movieId) {
 }
 
 function displayBestMovie(movie) {
-    // Get the HTML element where the best movie details will be displayed
-    const bestMovieSection = document.getElementById("best-movie");
-
-    // Extract movie details with fallback values if data is unavailable
-    const title = movie.title || "Titre non disponible"; // Default title if not available
-    const imageUrl = movie.image_url || "https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG"; // Default image if not available
-    const description = movie.description || "Description non disponible."; // Default description if not available
     
-    // Update the HTML content of the best movie section with the movie details
-    bestMovieSection.innerHTML = `
-        <h1>Meilleur film</h1>
-        <div class="best-movie-container">
-            <div class="col1" rowspan ="3">
-                <img class="movie-image" src="${imageUrl}" alt="${title}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG';">
-            </div>
-            <div class="col2"><h2 class="movie-title">${title}</h2></div>
-            <div class="col2"><p class="movie-description">${description}</p></div>
-            <div class="col2"><button class="movie-details-button">Détails</button></div>
-        </div>
-    `;
+    // Select elements
+const img = document.getElementById('best-movie-image');
+const title = document.getElementById('best-movie-title');
+const description = document.getElementById('best-movie-description');
+const button = document.getElementById('best-movie-details-button');
 
-    // Attach event to the "Détails" button
-    const btn = bestMovieSection.querySelector(".movie-details-button");
-    btn.onclick = () => showMovieModal(movie);
+// Fallback values
+const fallbackImage = "https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG";
+const fallbackTitle = "Titre non disponible";
+const fallbackDescription = "Description non disponible.";
+
+// Update elements with data or fallback
+img.src = movie.image_url || fallbackImage;
+img.alt = movie.title || fallbackTitle;
+title.textContent = movie.title || fallbackTitle;
+description.textContent = movie.description || fallbackDescription;
+
+// Add click event to the button to show movie details in a modal
+button.onclick = () => showMovieModal(movie);
 }
 
 function displayBestRatedMovies(movies) {
@@ -122,10 +118,15 @@ function displayBestRatedMovies(movies) {
 function displayCat1Movies(movies) {
     // Get the HTML element where the top-rated movies will be displayed
     const topRatedSection = document.getElementById("category-mystery");
+    // Select the <ul> inside the <section>
+    const ul = topRatedSection.querySelector('ul');
+    // Clear any existing content in the <ul>
+    ul.innerHTML = "";
+    // In the <ul>, create a new <li>
+    const li = document.createElement("li");
+    // Set its inner HTML (image, title, details)    
 
-    // Clear any existing content in the section exept the title
-    topRatedSection.innerHTML = "<h1>Mystery</h1>";
-
+   
     // Loop through each movie and create HTML elements to display them
     movies.forEach(movie => {
         const title = movie.title || "Titre non disponible"; // Default title if not available
