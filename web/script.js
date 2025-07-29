@@ -122,10 +122,6 @@ function displayCat1Movies(movies) {
     const ul = topRatedSection.querySelector('ul');
     // Clear any existing content in the <ul>
     ul.innerHTML = "";
-    // In the <ul>, create a new <li>
-    const li = document.createElement("li");
-    // Set its inner HTML (image, title, details)    
-
    
     // Loop through each movie and create HTML elements to display them
     movies.forEach(movie => {
@@ -141,8 +137,10 @@ function displayCat1Movies(movies) {
             <button>Détails</button>
         `;
 
-        // Append the new movie div to the top-rated section
-        topRatedSection.appendChild(movieDiv);
+        // In the <ul>, create a new <li>
+        const li = document.createElement("li");
+        li.appendChild(movieDiv); // Append the movie div to the <li>
+        ul.appendChild(li); // Append the <li> to the <ul>
     });
 }
 
@@ -150,9 +148,10 @@ function displayCat1Movies(movies) {
 function displayCat2Movies(movies) {
     // Get the HTML element where the top-rated movies will be displayed
     const topRatedSection = document.getElementById("category-2");
-
-    // Clear any existing content in the section exept the title
-    topRatedSection.innerHTML = "<h1>Action</h1>";
+    // Select the <ul> inside the <section>
+    const ul = topRatedSection.querySelector('ul');
+    // Clear any existing content in the <ul>
+    ul.innerHTML = "";
 
     // Loop through each movie and create HTML elements to display them
     movies.forEach(movie => {
@@ -168,9 +167,11 @@ function displayCat2Movies(movies) {
             <button>Détails</button>
         `;
 
-        // Append the new movie div to the top-rated section
-        topRatedSection.appendChild(movieDiv);
-    });
+        // In the <ul>, create a new <li>
+        const li = document.createElement("li");
+        li.appendChild(movieDiv); // Append the movie div to the <li>
+        ul.appendChild(li); // Append the <li> to the <ul>
+        });
 }
 
 // Show the modal with movie details
