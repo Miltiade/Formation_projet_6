@@ -1,61 +1,189 @@
-/* Reset some default browser styles */
+/* Modal window: images have square corners */
+.modal-content img {
+    border-radius: 0 !important;
+}
+/* =========================
+     GENRES MENU (AUTRES SECTION)
+     ========================= */
+/* Genre menu: horizontal, no bullets, clean spacing */
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;              /* Allows wrapping on small screens */
+    gap: 0.5em;                   /* Space between buttons */
+    list-style: none;             /* Remove bullets */
+    padding: 0;
+    margin: 1em 0;
+    justify-content: flex-start;  /* Align left, or use center if you prefer */
+}
+
+/* Genre buttons: pill-shaped, modern look */
+.genre-select {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 999px;         /* Fully rounded sides */
+    padding: 0.5em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    outline: none;
+}
+
+.genre-select:hover,
+.genre-select:focus {
+    background: #333;
+    color: #fff;
+}
+
+
+
+/* =========================
+/* Hide 'Voir plus' button on desktop (min-width: 900px) for all movie sections */
+@media (min-width: 900px) {
+    .voir-plus-btn {
+        display: none;
+    }
+}
+   /* RESPONSIVE MOVIE LIST LOGIC */
+   /* ========================= */
+/* These classes are used to hide extra movies in each section by default. */
+/* Only the first 2 movies are shown on mobile, first 4 on tablet, all 6 on desktop. */
+.hidden-mobile {
+    display: none; /* Hide on mobile by default */
+}
+.hidden-tablet {
+    display: none; /* Hide on tablet by default */
+}
+/* When the section has the 'expanded' class, show all movies regardless of device. */
+.movie-list-section.expanded .hidden-mobile,
+.movie-list-section.expanded .hidden-tablet {
+    display: block;
+}
+/* On tablet (min-width: 600px), show movies hidden by .hidden-tablet */
+@media (min-width: 600px) {
+    .hidden-tablet {
+        display: block;
+    }
+}
+/* On desktop (min-width: 900px), show movies hidden by .hidden-mobile */
+@media (min-width: 900px) {
+    .hidden-mobile {
+        display: block;
+    }
+}
+/* =========================
+   END RESPONSIVE MOVIE LIST LOGIC
+/* =========================
+
+
+/* =========================
+   GLOBAL STYLES AND RESETS
+   ========================= */
+/* Reset some default browser styles for consistency across browsers. */
 * {
     box-sizing: border-box;
 }
 
-/* Set a font and background for the entire page */
+/* Set a font, background color, and basic layout for the entire page. */
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background-color: white;
-    color: #333;
-    line-height: 1.6
-}
+    display: flex; /* Use flexbox for vertical layout */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    min-height: 100vh; /* Make sure the page fills the viewport */
+    font-family: Arial, sans-serif; /* Use a clean, readable font */
+    background-color: white; /* Set background color */
+    color: #333; /* Set default text color */
+    max-width: 900px; /* Set the maximum width for the entire page */
+    width: 100%; /* Make the page fill the available width up to max-width */
+    margin: 0 auto; /* Center the page horizontally in the browser window */
 
-/* Breakpoint for mobile phones */
+/* On mobile devices (max-width: 480px), center all content and text. */
 @media (max-width: 480px) {
     body {
         align-items: center;
         text-align: center;
     }
 }
+/* =========================
+   END GLOBAL STYLES
+   ========================= */
+
+
 
 /* =========================
    HEADER STYLES
    ========================= */
+/* The header contains the site logo and branding. */
+/* Header: visually matches width of other main containers */
 header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    margin: 1rem auto;
-    padding: 1rem;
-    background-color: grey;
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto 0 auto; /* Add space above header, center horizontally */
+    box-sizing: border-box;
+    padding: 1rem;           /* Add padding inside header for spacing */
+    background-color: grey;  /* Set background color for header, matches other elements */
+
 }
 
-/* On mobile, containers fill the screen */
+/* Container for header content: flexbox layout, left-aligned, small gap between items */
+.header-container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* Aligns both columns to the left */
+    gap: 1rem;                  /* Adds space between LOGO and Vidéos à la demande */
+}
+}
+
+/* Make 'Vidéos à la demande' text white in the header */
+.header-container .col2 {
+    color: white; /* Ensures only this text is white, not the whole header */
+}
+
+/* On mobile devices, make header and sections fill the screen width and add padding. */
 @media (max-width: 480px) {
     header, section {
         max-width: 100%;
         padding-left: 5rem;
         padding-right: 5rem;
     }
+}
+/* =========================
+   END HEADER STYLES
+   ========================= */
 
+
+   /* =========================
+    SECTION STYLES
+    ========================= */
+/* All main sections (movie lists, best movie, etc.) use these styles. */
+section {
+    margin: 1rem auto; /* Add margin above and below each section */
+    /* Removed padding to match header, for perfect alignment */
+    background-color: white; /* Set background color for sections */
+    border-radius: 1vw; /* Slightly round the corners for a modern look */
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Shared grid layout for all movie list sections: 3 columns, 2 rows */
+.movie-list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for movie boxes */
+    grid-template-rows: repeat(2, 1fr);    /* 2 rows for up to 6 movies */
+    gap: 1.5rem;                           /* Space between boxes */
+    max-width: 900px;      /* Limit width to match header and sections */
+    margin: 0 auto;        /* Center the grid horizontally */
+    width: 100%;           /* Fill available width up to max-width */
+}
 
 /* =========================
-   SECTION STYLES
-   ========================= */
-section {
-    margin: 1rem auto;
-    padding: 1rem;
-    background-color: white;
-    border-radius: 1vw;
-}
+    END SECTION STYLES
+    ========================= */
 
 
 /* =========================
@@ -227,11 +355,10 @@ h1, h2 {
 /* =========================
    MOVIE BOX STYLES
    ========================= */
-.movie-box {
+.movie {
     position: relative;
     background: none;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    border-radius: 0; /* Ensures the movie box has sharp, square corners */
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -244,29 +371,28 @@ h1, h2 {
 }
 
 /* Movie image fills the box */
-.movie-box img {
+.movie img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: 12px;
+    border-radius: 0;
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     z-index: 1;
 }
 
 /* Header overlay on movie image */
-.movie-box-header {
+.movie-overlay {
     position: absolute;
     left: 0;
     right: 0;
-    top: 8px;
+    top: 2em;
     margin-top: 0.5em;
     margin-bottom: 2em;
-    height: 33%;
+    height: 40%;
     min-height: 60px;
     background: rgba(30, 30, 30, 0.50);
-    border-radius: 12px 12px 32px 32px;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -275,38 +401,40 @@ h1, h2 {
     z-index: 2;
 }
 
-/* Movie title in header */
-.movie-box-title {
+/* Movie overlay grid */
+.movie-overlay-grid {
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    gap: 0.5em;
+    width: 100%;
+    height: 100%;
+}
+
+/* Movie title in overlay */
+.movie-overlay-grid .movie-title {
     color: #fff;
-    font-size: 1.1em;
+    font-size: larger;
     font-weight: bold;
     align-self: flex-start;
     margin: 0;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
     max-width: 70%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-/* Détails button in header */
-.movie-box-details-button {
-    align-self: flex-end;
-    background: #111;
+/* Détails button in overlay */
+.movie-overlay-grid .movie-details-button {
+    background: #403b3b;
     color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.8em 2.4em;
-    font-size: 1em;
-    font-weight: 500;
+    /* border: none; */
+    border-radius: 999px;
+    font: bold;
+    font-size: small;
     cursor: pointer;
-    margin: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
     transition: background 0.2s;
 }
-.movie-box-details-button:hover {
-    background: #333;
-}
+
 
 /* Modal styles */
 /* filepath: web/styles.css */
@@ -329,11 +457,11 @@ h1, h2 {
 .modal-content {
   background: #fff; /* White background */
   padding: 2em; /* Space inside modal */
-  border-radius: 10px; /* Rounded corners */
-  max-width: 500px; /* Maximum width */
-  width: 90vw; /* Responsive width */
+    border-radius: 0; /* Squared corners */
+        max-width: 750px; /* Maximum width (50% wider) */
+        width: auto; /* Let content define width, up to max-width */
   /* Add a thick black border */
-  border: 8px solid #000;
+    border: 5.3px solid #000;
   max-height: 90vh; /* Prevent overflow off screen */
   overflow-y: auto; /* Scroll if content is too tall */
   position: relative; /* For positioning close button */
@@ -345,10 +473,17 @@ h1, h2 {
 /* Close button: positioned in the bottom center of modal */
 .modal-close {
     position: static; /* No absolute positioning needed */
-    margin-top: auto; /* Pushes the button to the bottom in flex column */
+    margin-top: 2.5em; /* Add space above button (about 2 blank lines) */
+    border-radius: 999px; /* Fully rounded left and right sides (moon-shaped) */
     margin-bottom: 1em; /* Adds space below the button */
     align-self: center; /* Center horizontally in flexbox */
-    font-size: 2em; /* Large size for visibility */
+    font-size: 1em; /* Match 'Avec :' label size */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-left: 5em; /* Make button wider on the left */
+    padding-right: 5em; /* Make button wider on the right */
 }
 
 /* Responsive layout for 'Meilleur film' (Best Movie) section on mobile phones

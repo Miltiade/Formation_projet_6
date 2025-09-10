@@ -8,271 +8,101 @@
     <title>JustStreamIt -- Vidéos à la demande</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <!-- Header Section -->
+
+    <!-- =========================
+         HEADER SECTION
+         ========================= -->
+    <!-- The header contains the site logo. -->
     <header>
         <div class="header-container">
-            <div class="col1" rowspan ="2"></div>
-            <div class="col1"><img id="logo" src="https://via.placeholder.com/150x50?text=JustStreamIt+Logo" alt="JustStreamIt Logo"></div>
-
-        <!-- <img src="https://via.placeholder.com/800x200?text=JustStreamIt+--+Vidéos+à+la+demande" alt="JustStreamIt"> -->
+            <!-- Left column: displays the text 'LOGO' -->
+            <div class="col1">LOGO</div>
+            <!-- Right column: displays the text 'Vidéos à la demande' -->
+            <div class="col2">Vidéos à la demande</div>
         </div>
     </header>
 
-    <!-- Best Movie Section -->
-        <section id="best-movie">
-            <h2 class="best-movie-title">Meilleur film</h2>
-            <div class="best-movie-container">
-                <div class="col1" rowspan ="3">
-                    <img id="best-movie-image" src="https://picsum.photos/200/300" alt="Best Movie Placeholder">
-                </div>
-                <div class="col2 best-movie-title" id="best-movie-title">Titre du film</div>
-                <div class="col2" id="best-movie-description">Description du film.</div>
-                <div class="col2"><button id="best-movie-details-button" class="movie-details-button">Détails</button></div>
-                </div>
-        </section>
-
-    <!-- Best rated movies section -->
-    <section id="best-rated">
-        <h2>Films les mieux notés</h2>
-        <div class="best-rated-container">
-            <div class="movie-box">         
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <div class="movie-box-header">
-                    <span class="movie-box-title">Titre du film 1</span>
-                    <button class="movie-box-details-button">Détails</button>                
+    <!-- =========================
+         BEST MOVIE SECTION
+         ========================= -->
+    <!-- This section displays the best-rated movie, with its image, title, description, and a details button. -->
+    <section id="best-movie">
+        <h2 class="best-movie-title">Meilleur film</h2>
+        <div class="best-movie-container">
+            <!-- Movie image (left column) -->
+            <div class="col1" rowspan ="3">
+                <img id="best-movie-image" src="https://picsum.photos/200/300" alt="Best Movie Placeholder">
             </div>
-        </div>
-
-            <div class="movie-box">         
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <div class="movie-box-header">
-                    <span class="movie-box-title">Titre du film 2</span>
-                    <button class="movie-box-details-button">Détails</button>                
-            </div>
-        </div>
-
-            <div class="movie-box">         
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <div class="movie-box-header">
-                    <span class="movie-box-title">Titre du film 3</span>
-                    <button class="movie-box-details-button">Détails</button>                
-            </div>
-        </div>
-
-            <div class="movie-box">         
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <div class="movie-box-header">
-                    <span class="movie-box-title">Titre du film 4</span>
-                    <button class="movie-box-details-button">Détails</button>                
-            </div>
-        </div>
-
-            <div class="movie-box">         
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <div class="movie-box-header">
-                    <span class="movie-box-title">Titre du film 5</span>
-                    <button class="movie-box-details-button">Détails</button>                
-            </div>
-        </div>
-
-            <div class="movie-box">         
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <div class="movie-box-header">
-                    <span class="movie-box-title">Titre du film 6</span>
-                    <button class="movie-box-details-button">Détails</button>                
+            <!-- Movie title (center column) -->
+            <div class="col2 best-movie-title" id="best-movie-title">Titre du film</div>
+            <!-- Movie description (center column) -->
+            <div class="col2" id="best-movie-description">Description du film.</div>
+            <!-- Details button (center column) -->
+            <div class="col2">
+                <button id="best-movie-details-button" class="movie-details-button">Détails</button>
             </div>
         </div>
     </section>
 
-    <!-- MYSTERY section -->
-    <section id="category-mystery">
-        <h2>Mystery</h2>
-        <ul>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 1</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 2</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 3</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 4</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 5</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 6</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-        </ul>
+    <!-- =========================
+         BEST RATED MOVIES SECTION
+         ========================= -->
+    <!-- This section will be filled dynamically by script.js with the 6 best rated movies (excluding the best movie). -->
+    <section id="best-rated-movies">
+    <h2 class="section-title">Films les mieux notés</h2>
+    <div class="movie-list-wrapper"></div>
     </section>
 
-    <!-- CATEGORY 2 section -->
-    <section id="category-2">
-        <h2>Action</h2>
-        <ul>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 1</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 2</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 3</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 4</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 5</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 6</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-        </ul>
+    <!-- =========================
+         MYSTERY CATEGORY SECTION
+         ========================= -->
+    <!-- This section will be filled dynamically by script.js with the 6 best Mystery movies. -->
+    <section id="cat1-movies">
+    <h2 class="section-title">Mystery</h2>
+    <div class="movie-list-wrapper"></div>
     </section>
 
-    <!-- Category 3 (OTHERS) section -->
-    <section id="category-others-1">
-        <h2>Autres:</h2>
-        <button onclick="toggleDropdown1()">Menu déroulant</button>
-        <div id="dropdown-menu-1" style="display: none;">
-            <ul>
-                <li>Films d'action</li>
-                <li>Comédies</li>
-                <li>Famille</li>
-                <li>Films de fantasy</li>
-                <li>Films d'horreur</li>
-                <li>Science-fiction</li>
-                <li>Westerns</li>
-            </ul>
+    <!-- =========================
+         ACTION CATEGORY SECTION
+         ========================= -->
+    <!-- This section will be filled dynamically by script.js with the 6 best Action movies. -->
+    <section id="cat2-movies">
+    <h2 class="section-title">Action</h2>
+    <div class="movie-list-wrapper"></div>
+    </section>
+
+    <!-- =========================
+         DYNAMIC CATEGORY (AUTRES) SECTION
+         ========================= -->
+    <!-- This section displays the genre dropdown and the selected genre's movies. -->
+    <section id="category-others">
+    <h2 class="section-title">Autres:</h2>
+    <div id="dropdown-menu-1"></div>
+    <div class="movie-list-wrapper"></div>
+        <!-- The movie list for the selected genre will be injected by script.js -->
+        <div id="cat-others-movies"></div>
+    </section>
+
+    <!-- =========================
+         MOVIE DETAILS MODAL
+         ========================= -->
+    <!-- This modal displays detailed information about a movie when the user clicks 'Détails'. -->
+    <div id="movie-modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <div id="modal-body">
+          <!-- Movie details will be injected here by script.js -->
         </div>
-        <script>
-            function toggleDropdown1() {
-                const menu = document.getElementById('dropdown-menu-1');
-                menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-            }
-        </script>
-        <ul>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 1</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 2</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 3</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 4</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 5</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 6</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-        </ul>
-    </section>
-
-    <!-- Category 4 (OTHERS) section -->
-    <section id="category-others-2">
-        <h2>Autres:</h2>
-        <button onclick="toggleDropdown2()">Menu déroulant</button>
-        <div id="dropdown-menu-2" style="display: none;">
-            <ul>
-                <li>Films d'action</li>
-                <li>Comédies</li>
-                <li>Famille</li>
-                <li>Films de fantasy</li>
-                <li>Films d'horreur</li>
-                <li>Science-fiction</li>
-                <li>Westerns</li>
-            </ul>
-        </div>
-        <script>
-            function toggleDropdown2() {
-                const menu = document.getElementById('dropdown-menu-2');
-                menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-            }
-        </script>
-        <ul>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 1</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 2</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 3</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 4</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-            <li>
-                <img src="https://picsum.photos/100/150" alt="Movie Placeholder">
-                <p>Titre du film 5</p>
-                <p><button class="movie-box-details-button">Détails</button></p>
-            </li>
-        </ul>
-    </section>
-    <!-- Movie Details Modal -->
-<div id="movie-modal" class="modal" style="display:none;">
-  <div class="modal-content">
-    <div id="modal-body">
-      <!-- Movie details will be injected here -->
+        <!-- Close button at the bottom center -->
+        <button id="modal-close" class="modal-close movie-details-button" aria-label="Fermer">Fermer</button>
+      </div>
     </div>
-    <!-- Close button at the bottom center -->
-    <button id="modal-close" class="modal-close movie-details-button" aria-label="Fermer">Fermer</button>
-  </div>
-</div>
+
+    <!-- =========================
+         JAVASCRIPT INCLUSION
+         ========================= -->
+    <!-- The main script for dynamic rendering and interactivity. -->
     <script src="script.js"></script>
 </body>
 </html>
