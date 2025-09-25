@@ -116,8 +116,10 @@ function renderMoviesWithVoirPlus(container, movies, sectionClass) {
 // --- Display functions for each section ---
 // Display the 6 best rated movies (excluding the best movie)
 function displayBestRatedMovies(movies) {
-    // Get the section for best rated movies
-    const section = document.getElementById('best-rated-movies');
+  // Get the section for best rated movies
+  const section = document.getElementById('best-rated-movies');
+  // Ensure correct CSS class for mobile hiding
+  section.classList.add('movie-list-section');
     if (!section) {
         console.error('Container #best-rated-movies not found in HTML.');
         return;
@@ -217,73 +219,104 @@ function displayBestMovie(movie) {
 
 // --- Show the modal with movie details ---
 function showMovieModal(movie) {
-    const modal = document.getElementById("movie-modal");
-    const modalBody = document.getElementById("modal-body");
+  const modal = document.getElementById("movie-modal");
+  const modalBody = document.getElementById("modal-body");
+  const modalTitle = document.getElementById("modal-title"); // Get modal title element for header
 
-    // Use fallback values for missing data
-    const title = movie.title || "Titre non disponible";
-  // Use the 'year' field directly if available
+  // Use fallback values for missing data
+  const title = movie.title || "Titre non disponible";
   const year = movie.year || "Année non disponible";
-    const genres = movie.genres ? movie.genres.join(', ') : "Genre non disponible";
-    const classification = movie.rated || "Classification non disponible";
-    const duration = movie.duration ? movie.duration + " min" : "Durée non disponible";
-    const country = movie.countries ? movie.countries.join(', ') : "Pays non disponible";
-    const imdb = movie.imdb_score || "Score IMDB non disponible";
-    const boxoffice = movie.worldwide_gross_income || "Box-office non disponible";
-    const director = movie.directors ? movie.directors.join(', ') : "Réalisateur non disponible";
-    const description = movie.description || "Résumé non disponible";
-    const actors = movie.actors ? movie.actors.join(', ') : "Acteurs non disponibles";
-    const image = movie.image_url || "https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG";
+  const genres = movie.genres ? movie.genres.join(', ') : "Genre non disponible";
+  const classification = movie.rated || "Classification non disponible";
+  const duration = movie.duration ? movie.duration + " min" : "Durée non disponible";
+  const country = movie.countries ? movie.countries.join(', ') : "Pays non disponible";
+  const imdb = movie.imdb_score || "Score IMDB non disponible";
+  const boxoffice = movie.worldwide_gross_income || "Box-office non disponible";
+  const director = movie.directors ? movie.directors.join(', ') : "Réalisateur non disponible";
+  const description = movie.description || "Résumé non disponible";
+  const actors = movie.actors ? movie.actors.join(', ') : "Acteurs non disponibles";
+  const image = movie.image_url || "https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG";
 
-    // Build the HTML for the modal content using two tables
+  // Responsive layout: single-column for mobile/tablet, table for desktop
+  const isMobile = window.innerWidth <= 900;
+  if (isMobile) {
+    // Mobile/tablet: inject title into modal header
+    if (modalTitle) {
+      modalTitle.textContent = title;
+    }
+    // Mobile/tablet: single-column layout
+    // Note: Title is now injected into #modal-title in the header, not in modalBody.
+    // Beginners: This keeps the cross and title on the same line.
     modalBody.innerHTML = `
-        <!-- First table: 2 rows, 2 columns (image on right, info on left) -->
-        <table style="width:100%; border-collapse:collapse; background:none;">
-          <tr>
-            <td style="vertical-align:top; padding-right:1em;">
-              <!-- All lines from title to box-office are bold, title is h1 -->
-              <div style="font-weight:bold;">
-                <h1 style="margin:0;">${title}</h1> <!-- Movie title as h1 -->
-                <div>${year} &mdash; ${genres}</div>
-                <div>${classification}, ${duration}, ${country}</div>
-                <div>IMDB : ${imdb}</div>
-                <!-- Format box office as "$98,09m" (millions, 2 decimals, comma as decimal separator) -->
-                <div>Box-office : ${
-                  isNaN(Number(boxoffice))
-                    ? "Box-office non disponible"
-                    : "$" + (Number(boxoffice) / 1_000_000).toFixed(2).replace('.', ',') + "m"
-                }</div>
-              </div>
-            </td>
-            <td rowspan="2" style="width:180px; text-align:center; vertical-align:top;">
-              <img src="${image}" alt="${title}" style="max-width:160px; max-height:220px; object-fit:cover;">
-            </td>
-          </tr>
-          <tr>
-            <td style="vertical-align:top;">
-              <!-- Display 'Réalisé par :' and director's name on two separate lines for clarity -->
-              <div style="margin-top:1.5em;"><strong>Réalisé par :</strong></div>
-              <div>${director}</div>
-            </td>
-          </tr>
-        </table>
-        <!-- Second table: 2 rows, 1 column (description, then actors) -->
-        <table style="width:100%; margin-top:1em; border-collapse:collapse; background:none;">
-          <tr>
-            <td>
-              <div> ${description}</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <!-- Display 'Avec :' and actors' names on two separate lines for clarity -->
-              <div style="margin-top:1.5em;"><strong>Avec :</strong></div>
-              <div>${actors}</div>
-            </td>
-          </tr>
-        </table>
+      <div style="font-weight:bold;">
+        <div>${year} &mdash; ${genres}</div>
+        <div>${classification}, ${duration}, ${country}</div>
+        <div>IMDB : ${imdb}</div>
+        <div>Box-office : ${
+          isNaN(Number(boxoffice))
+            ? "Box-office non disponible"
+            : "$" + (Number(boxoffice) / 1_000_000).toFixed(2).replace('.', ',') + "m"
+        }</div>
+      </div>
+      <div style="margin-top:1.5em;"><strong>Réalisé par :</strong></div>
+      <div>${director}</div>
+      <div>${description}</div>
+      <div style="margin:1.5em 0;">
+        <img src="${image}" alt="${title}" style="max-width:160px; max-height:220px; object-fit:cover; display:block; margin:auto;">
+      </div>
+      <div style="margin-top:1.5em;"><strong>Avec :</strong></div>
+      <div>${actors}</div>
     `;
-
+  } else {
+    // Desktop: clear modal header title so it is not visible or present for screen readers
+    if (modalTitle) {
+      modalTitle.textContent = "";
+    }
+    // Desktop: table-based layout
+    modalBody.innerHTML = `
+      <!-- First table: 2 rows, 2 columns (image on right, info on left) -->
+      <table style="width:100%; border-collapse:collapse; background:none;">
+        <tr>
+          <td style="vertical-align:top; padding-right:1em;">
+            <div style="font-weight:bold;">
+              <h1 style="margin:0;">${title}</h1>
+              <div>${year} &mdash; ${genres}</div>
+              <div>${classification}, ${duration}, ${country}</div>
+              <div>IMDB : ${imdb}</div>
+              <div>Box-office : ${
+                isNaN(Number(boxoffice))
+                  ? "Box-office non disponible"
+                  : "$" + (Number(boxoffice) / 1_000_000).toFixed(2).replace('.', ',') + "m"
+              }</div>
+            </div>
+          </td>
+          <td rowspan="2" style="width:180px; text-align:center; vertical-align:top;">
+            <img src="${image}" alt="${title}" style="max-width:160px; max-height:220px; object-fit:cover;">
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align:top;">
+            <div style="margin-top:1.5em;"><strong>Réalisé par :</strong></div>
+            <div>${director}</div>
+          </td>
+        </tr>
+      </table>
+      <table style="width:100%; margin-top:1em; border-collapse:collapse; background:none;">
+        <tr>
+          <td>
+            <div> ${description}</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div style="margin-top:1.5em;"><strong>Avec :</strong></div>
+            <div>${actors}</div>
+          </td>
+        </tr>
+      </table>
+    `;
+  }
+  
     // Show the modal
     modal.style.display = "flex";
 }
@@ -367,91 +400,43 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
 
-        // Handle 'Voir plus' / 'Voir moins' button clicks
-        const voirBtn = ev.target.closest('.voir-plus-btn');
-        if (voirBtn) {
-            const section = voirBtn.closest('.movie-list-section');
-            if (section) {
-                // Toggle a class to show/hide extra movies
-                section.classList.toggle('expanded');
-                // Update button text
-                voirBtn.textContent = section.classList.contains('expanded') ? 'Voir moins' : 'Voir plus';
+    // Handle 'Voir plus' / 'Voir moins' button clicks
+    const voirBtn = ev.target.closest('.voir-plus-btn');
+    if (voirBtn) {
+      const section = voirBtn.closest('.movie-list-section');
+      if (section) {
+        // Toggle expanded class
+        section.classList.toggle('expanded');
+        // Update button text
+        voirBtn.textContent = section.classList.contains('expanded') ? 'Voir moins' : 'Voir plus';
+
+        // Find all movie boxes in this section
+        const boxes = section.querySelectorAll('.movie-list-wrapper .movie');
+        boxes.forEach((box, idx) => {
+          // If expanded, show all boxes (remove hidden-mobile)
+          if (section.classList.contains('expanded')) {
+            box.classList.remove('hidden-mobile');
+          } else {
+            // Responsive collapse logic:
+            // On mobile: show 2 movies, on tablet: show 4, on desktop: show all
+            const width = window.innerWidth;
+            let visibleCount = 2; // Default: mobile
+            if (width >= 600 && width < 900) {
+              visibleCount = 4; // Tablet
+            } else if (width >= 900) {
+              visibleCount = 6; // Desktop
             }
-        }
+            if (idx >= visibleCount) {
+              box.classList.add('hidden-mobile'); // Hide extra movies
+            } else {
+              box.classList.remove('hidden-mobile'); // Show visible movies
+            }
+          }
+        });
+      }
+    }
     });
 });
-
-
-// --- End of file ---
-
-// Show the modal with movie details
-function showMovieModal(movie) {
-    const modal = document.getElementById("movie-modal");
-    const modalBody = document.getElementById("modal-body");
-
-    // Use fallback values for missing data
-    const title = movie.title || "Titre non disponible";
-  const year = movie.year || "Année non disponible";
-    const genres = movie.genres ? movie.genres.join(', ') : "Genre non disponible";
-    const classification = movie.rated || "Classification non disponible";
-    const duration = movie.duration ? movie.duration + " min" : "Durée non disponible";
-    const country = movie.countries ? movie.countries.join(', ') : "Pays non disponible";
-    const imdb = movie.imdb_score || "Score IMDB non disponible";
-    const boxoffice = movie.worldwide_gross_income || "Box-office non disponible";
-    const director = movie.directors ? movie.directors.join(', ') : "Réalisateur non disponible";
-    const description = movie.description || "Résumé non disponible";
-    const actors = movie.actors ? movie.actors.join(', ') : "Acteurs non disponibles";
-    const image = movie.image_url || "https://upload.wikimedia.org/wikipedia/commons/3/31/Image_non_disponible.JPG";
-
-    // Build the HTML for the modal content using two tables
-    modalBody.innerHTML = `
-        <!-- First table: 2 rows, 2 columns (image on right, info on left) -->
-        <table style="width:100%; border-collapse:collapse; background:none;">
-          <tr>
-            <td style="vertical-align:top; padding-right:1em;">
-              <!-- All lines from title to box-office are bold, title is h1 -->
-              <div style="font-weight:bold;">
-                <h1 style="margin:0;">${title}</h1> <!-- Movie title as h1 -->
-                <div>${year} &mdash; ${genres}</div>
-                <div>${classification} - ${duration} (${country})</div>
-                <div>IMDB score : ${imdb}/10</div>
-                <div>Recettes au box-office : ${
-                  isNaN(Number(boxoffice))
-                    ? "Box-office non disponible"
-                    : "$" + (Number(boxoffice) / 1_000_000).toFixed(2).replace('.', ',') + "m"
-                }</div>
-              </div>
-            </td>
-            <td rowspan="2" style="width:180px; text-align:center; vertical-align:top;">
-              <img src="${image}" alt="${title}" style="max-width:160px; max-height:220px; object-fit:cover;">
-            </td>
-          </tr>
-          <tr>
-            <td style="vertical-align:top;">
-              <div style="margin-top:1.5em;"><strong>Réalisé par :</strong></div>
-              <div>${director}</div>
-            </td>
-          </tr>
-        </table>
-        <!-- Second table: 2 rows, 1 column (description, then actors) -->
-        <table style="width:100%; margin-top:1em; border-collapse:collapse; background:none;">
-          <tr>
-            <td>
-              <div> ${description}</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div style="margin-top:1.5em;"><strong>Avec :</strong></div>
-              <div>${actors}</div>
-            </td>
-          </tr>
-        </table>
-    `;
-
-    // Show the modal
-    modal.style.display = "flex";
-}
 
 // Hide the modal
 function hideMovieModal() {
@@ -463,7 +448,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("modal-close").onclick = hideMovieModal;
     // Optional: close modal when clicking outside content
     document.getElementById("movie-modal").onclick = function(e) {
-        if (e.target === this) hideMovieModal();
+      if (e.target === this) hideMovieModal();
     };
+    // Attach close event to mobile cross button
+    const closeCross = document.getElementById("modal-close-cross");
+    if (closeCross) {
+      closeCross.onclick = hideMovieModal;
+    } else {
+      // If the cross button is not found, log a helpful error for debugging
+      console.warn('Modal close cross button (#modal-close-cross) not found in DOM.');
+    }
 });
 

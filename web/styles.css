@@ -1,3 +1,107 @@
+/* Hide modal header in desktop view, show only in mobile/tablet */
+.modal-header {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .modal-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* Vertically center title and cross button */
+        justify-content: space-between; /* Place title left, cross right */
+        width: 100%;
+        padding-bottom: 0.5em;
+        /* No border-bottom: client requires no horizontal line in modal header. */
+        /* Beginners: flexbox ensures both elements are on the same line and centered vertically. */
+    }
+}
+/* Modal: single-column layout for mobile and tablet */
+@media (max-width: 900px) {
+    #modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5em; /* Space between rows */
+    }
+    #modal-body table {
+        width: 100%;
+        margin: 0;
+        border-collapse: collapse;
+    }
+    #modal-body img {
+        display: block;
+        margin: 0 auto 1em auto;
+        max-width: 180px;
+        max-height: 220px;
+        object-fit: cover;
+    }
+    #modal-body td {
+        width: 100%;
+        padding: 0.5em 0;
+        text-align: left;
+        vertical-align: top;
+    }
+}
+/* Style 'Voir plus' button to match 'Fermer' button in modal */
+.voir-plus-btn {
+    background-color: #d32f2f;      /* Same red as Fermer */
+    color: #fff;                    /* White text */
+    border: none;
+    border-radius: 999px;           /* Fully rounded sides */
+    padding: 0.5em 5em;               /* Double horizontal padding for extra width */
+    font-size: 1em;                 /* Match Fermer button size */
+    font-weight: bold;
+    display: block;
+    margin: 2em auto 1em auto;      /* Center horizontally, add space above and below */
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.voir-plus-btn:hover {
+    background-color: #b71c1c;      /* Slightly darker on hover */
+}
+/* Stronger selector to ensure mobile hiding works */
+.movie-list-wrapper .movie.hidden-mobile {
+/* On tablet view (min-width: 600px and max-width: 900px), show movies with .hidden-mobile. */
+@media (min-width: 600px) and (max-width: 900px) {
+    .movie-list-wrapper .movie.hidden-mobile {
+        display: block !important; /* Show movies with .hidden-mobile on tablet */
+    }
+}
+/* Stronger selector to ensure tablet hiding works (same logic as .hidden-mobile) */
+.movie-list-wrapper .movie.hidden-tablet {
+    display: none !important; /* Hide movies with .hidden-tablet by default */
+}
+@media (min-width: 900px) {
+    .movie-list-wrapper .movie.hidden-tablet {
+        display: block !important; /* Show movies with .hidden-tablet on desktop */
+    }
+}
+.movie-list-section.expanded .movie-list-wrapper .movie.hidden-tablet {
+    display: block !important; /* Show all movies when expanded, regardless of device */
+}
+    display: none !important;
+}
+@media (min-width: 900px) {
+    .movie-list-wrapper .movie.hidden-mobile {
+        display: block !important;
+    }
+}
+.movie-list-section.expanded .movie-list-wrapper .movie.hidden-mobile {
+    display: block !important;
+}
+/* Hide extra movie boxes on mobile by default */
+.hidden-mobile {
+    display: none;
+}
+@media (min-width: 900px) {
+    .hidden-mobile {
+        display: block;
+    }
+}
+.movie-list-section.expanded .hidden-mobile {
+    display: block;
+}
 /* Modal window: images have square corners */
 .modal-content img {
     border-radius: 0 !important;
@@ -53,15 +157,27 @@
     display: none; /* Hide on mobile by default */
 }
 .hidden-tablet {
-    display: none; /* Hide on tablet by default */
+    display: none; /* Hide by default, but only for tablet view via media query below */
 }
 /* When the section has the 'expanded' class, show all movies regardless of device. */
 .movie-list-section.expanded .hidden-mobile,
 .movie-list-section.expanded .hidden-tablet {
     display: block;
 }
-/* On tablet (min-width: 600px), show movies hidden by .hidden-tablet */
-@media (min-width: 600px) {
+/* On tablet ONLY (min-width: 600px and max-width: 900px), hide movies with .hidden-tablet. */
+@media (min-width: 600px) and (max-width: 900px) {
+    .hidden-tablet {
+        display: none;
+    }
+}
+/* On mobile (max-width: 600px), show movies with .hidden-tablet. */
+@media (max-width: 600px) {
+    .hidden-tablet {
+        display: block;
+    }
+}
+/* On desktop (min-width: 900px), show movies with .hidden-tablet. */
+@media (min-width: 900px) {
     .hidden-tablet {
         display: block;
     }
@@ -98,14 +214,35 @@ body {
     max-width: 900px; /* Set the maximum width for the entire page */
     width: 100%; /* Make the page fill the available width up to max-width */
     margin: 0 auto; /* Center the page horizontally in the browser window */
+}
 
 /* On mobile devices (max-width: 480px), center all content and text. */
-@media (max-width: 480px) {
+@media (max-width: 900px) {
+    /* Always keep horizontal margin on mobile/tablet, as on desktop. */
     body {
-        align-items: center;
-        text-align: center;
+        max-width: 900px;
+        margin-left: 3em;
+        margin-right: 3em;
+        /* Beginners: margin keeps content away from screen edges. Doubled for more space. */
+        width: auto;
+    }
+    section {
+        max-width: 900px;
+        margin-left: 3em;
+        margin-right: 3em;
+        /* Add margin to all sections for consistent spacing. Doubled for more space. */
+        width: auto;
+    }
+    .movie-list-wrapper {
+        max-width: 900px;
+        margin-left: 3em;
+        margin-right: 3em;
+        /* Add margin to movie grid for consistent spacing. Doubled for more space. */
+        width: auto;
     }
 }
+
+
 /* =========================
    END GLOBAL STYLES
    ========================= */
@@ -137,21 +274,26 @@ header {
     justify-content: flex-start; /* Aligns both columns to the left */
     gap: 1rem;                  /* Adds space between LOGO and Vidéos à la demande */
 }
-}
 
 /* Make 'Vidéos à la demande' text white in the header */
 .header-container .col2 {
     color: white; /* Ensures only this text is white, not the whole header */
 }
 
-/* On mobile devices, make header and sections fill the screen width and add padding. */
 @media (max-width: 480px) {
-    header, section {
-        max-width: 100%;
-        padding-left: 5rem;
-        padding-right: 5rem;
+    .header-container .logo {
+        /* Make LOGO bold and centered */
+        font-weight: bold;           /* Ensures text is bold */
+        width: 100%;                 /* Take full width */
+        text-align: center;          /* Center the text horizontally */
+        display: block;              /* Ensure block-level for centering */
+    }
+    .header-container > *:not(.logo) {
+        /* Hide all siblings except the logo */
+        display: none !important;    /* Hide other header elements */
     }
 }
+
 /* =========================
    END HEADER STYLES
    ========================= */
@@ -180,6 +322,18 @@ section {
     margin: 0 auto;        /* Center the grid horizontally */
     width: 100%;           /* Fill available width up to max-width */
 }
+
+/* Mobile: show only 1 column in movie lists (2 visible boxes, rest hidden by .hidden-mobile) */
+@media (max-width: 480px) {
+    .movie-list-wrapper {
+        grid-template-columns: 1fr;      /* Only 1 column */
+        grid-template-rows: repeat(2, 1fr); /* 2 rows for 2 movies */
+        gap: 1.2rem;                     /* Slightly smaller gap for mobile */
+        /* Removed min-width and max-width so margins are respected. */
+        /* Beginners: This allows left/right margin to show on mobile/tablet. */
+    }
+}
+
 
 /* =========================
     END SECTION STYLES
@@ -470,21 +624,121 @@ h1, h2 {
   align-items: center; /* Center children horizontally */
 }
 
-/* Close button: positioned in the bottom center of modal */
+/* Close button: positioned in the bottom center of modal (desktop only) */
 .modal-close {
-    position: static; /* No absolute positioning needed */
-    margin-top: 2.5em; /* Add space above button (about 2 blank lines) */
-    border-radius: 999px; /* Fully rounded left and right sides (moon-shaped) */
-    margin-bottom: 1em; /* Adds space below the button */
-    align-self: center; /* Center horizontally in flexbox */
-    font-size: 1em; /* Match 'Avec :' label size */
+    position: static;
+/* =========================
+   RESPONSIVE MOVIE LIST LOGIC (STRONG SELECTORS ONLY)
+   ========================= */
+/* Beginners: Only the first 2 movies are shown on mobile, first 4 on tablet, all 6 on desktop. */
+/* We use strong selectors and !important to ensure correct visibility. */
+
+/* Hide extra movies on mobile by default (strong selector) */
+.movie-list-wrapper .movie.hidden-mobile {
+    display: none !important;
+}
+/* Hide extra movies on tablet by default (strong selector) */
+.movie-list-wrapper .movie.hidden-tablet {
+    display: none !important;
+}
+/* Show movies with .hidden-mobile on tablet (600px–900px) */
+@media (min-width: 600px) and (max-width: 900px) {
+    .movie-list-wrapper .movie.hidden-mobile {
+        display: block !important;
+    }
+    .movie-list-wrapper .movie.hidden-tablet {
+        display: none !important;
+    }
+}
+/* Show all movies on desktop (≥900px) */
+@media (min-width: 900px) {
+    .movie-list-wrapper .movie.hidden-mobile,
+    .movie-list-wrapper .movie.hidden-tablet {
+        display: block !important;
+    }
+}
+/* When the section is expanded, show all movies regardless of device */
+.movie-list-section.expanded .movie-list-wrapper .movie.hidden-mobile,
+.movie-list-section.expanded .movie-list-wrapper .movie.hidden-tablet {
+    display: block !important;
+}
+/* =========================
+   END RESPONSIVE MOVIE LIST LOGIC
+   ========================= */
+    margin-top: 2.5em;
+    border-radius: 999px;
+    margin-bottom: 1em;
+    align-self: center;
+    font-size: 1em;
     display: block;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    padding-left: 5em; /* Make button wider on the left */
-    padding-right: 5em; /* Make button wider on the right */
+    padding-left: 5em;
+    padding-right: 5em;
 }
+
+/* Modal header for mobile: flex row, title left, cross right */
+.modal-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Vertically center title and cross button */
+    justify-content: space-between; /* Place title left, cross right */
+    width: 100%;
+    padding-bottom: 0.5em;
+    /* No border-bottom: client requires no horizontal line in modal header. */
+    /* Beginners: flexbox ensures both elements are on the same line and centered vertically. */
+}
+
+/* Modal title styling (injected by JS) */
+#modal-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #222;
+    margin-left: 0.5em;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Close cross button: red, top right, only on mobile */
+.modal-close-cross {
+    background: none;
+    border: none;
+    color: #d32f2f;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 0.5em;
+    margin-left: 1em;
+    line-height: 1;
+    padding: 0.2em 0.5em;
+    display: none; /* Hidden by default, shown on mobile */
+}
+
+@media (max-width: 900px) {
+    /* Show cross button, hide bottom button on mobile/tablet */
+    .modal-close-cross {
+        display: inline-block;
+    }
+    .modal-close {
+        display: none;
+    }
+    .modal-header {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        display: grid;
+        align-items: left;
+        text-align: left;
+        padding: 1em; /* Less padding on mobile */
+    }
+}
+
 
 /* Responsive layout for 'Meilleur film' (Best Movie) section on mobile phones
    Adjusted: thicker sharp border, image fully stretched, centered title, justified details */

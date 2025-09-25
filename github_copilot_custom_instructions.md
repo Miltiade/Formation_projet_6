@@ -20,7 +20,7 @@ This project is a web application for managing and interacting with movie data. 
 - Always use as context: entire current workspace.
 - Only suggest the simplest and most stable solutions.
 - When making suggestions, always explain thoroughly the reasoning behind suggestions: present the issue, and also best practices and common mistakes when dealing with it. 
-- When suggesting code, always add code comments for clarity.
+- When suggesting code, always add code comments for clarity. Comments must be verbose. They must help beginner students understand the code.
 
 
 ### Goals

@@ -18,7 +18,7 @@
     <header>
         <div class="header-container">
             <!-- Left column: displays the text 'LOGO' -->
-            <div class="col1">LOGO</div>
+            <div class="col1 logo">LOGO</div>
             <!-- Right column: displays the text 'Vidéos à la demande' -->
             <div class="col2">Vidéos à la demande</div>
         </div>
@@ -91,11 +91,18 @@
     <!-- This modal displays detailed information about a movie when the user clicks 'Détails'. -->
     <div id="movie-modal" class="modal" style="display:none;">
       <div class="modal-content">
-        <div id="modal-body">
-          <!-- Movie details will be injected here by script.js -->
-        </div>
-        <!-- Close button at the bottom center -->
-        <button id="modal-close" class="modal-close movie-details-button" aria-label="Fermer">Fermer</button>
+                <!-- Modal header: contains title and close cross for mobile -->
+                <div class="modal-header">
+                    <!-- Movie title will be injected by script.js -->
+                    <span id="modal-title"></span>
+                    <!-- Close cross button, only visible on mobile -->
+                    <button id="modal-close-cross" class="modal-close-cross" aria-label="Fermer">&times;</button>
+                </div>
+                <div id="modal-body">
+                    <!-- Movie details will be injected here by script.js -->
+                </div>
+                <!-- Close button at the bottom center (desktop only) -->
+                <button id="modal-close" class="modal-close movie-details-button" aria-label="Fermer">Fermer</button>
       </div>
     </div>
 
