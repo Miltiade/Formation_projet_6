@@ -210,6 +210,13 @@ function displayBestMovie(movie) {
     // Update elements with data or fallback
     img.src = movie.image_url || fallbackImage;
     img.alt = movie.title || fallbackTitle;
+
+    // If the image fails to load (404, broken link), use the fallback image
+    img.onerror = function() {
+      this.onerror = null; // Prevent infinite loop if fallback also fails
+      this.src = fallbackImage;
+    };
+
     title.textContent = movie.title || fallbackTitle;
     description.textContent = movie.description || fallbackDescription;
 
@@ -413,23 +420,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Find all movie boxes in this section
         const boxes = section.querySelectorAll('.movie-list-wrapper .movie');
         boxes.forEach((box, idx) => {
-          // If expanded, show all boxes (remove hidden-mobile)
           if (section.classList.contains('expanded')) {
+            // Show all movies: remove both hidden classes
             box.classList.remove('hidden-mobile');
+            box.classList.remove('hidden-tablet');
           } else {
-            // Responsive collapse logic:
-            // On mobile: show 2 movies, on tablet: show 4, on desktop: show all
             const width = window.innerWidth;
-            let visibleCount = 2; // Default: mobile
-            if (width >= 600 && width < 900) {
-              visibleCount = 4; // Tablet
-            } else if (width >= 900) {
-              visibleCount = 6; // Desktop
-            }
-            if (idx >= visibleCount) {
-              box.classList.add('hidden-mobile'); // Hide extra movies
+            if (width < 600) {
+              // Mobile: show 2 movies
+              if (idx >= 2) {
+                box.classList.add('hidden-mobile');
+              } else {
+                box.classList.remove('hidden-mobile');
+              }
+              box.classList.remove('hidden-tablet');
+            } else if (width >= 600 && width < 900) {
+              // Tablet: show 4 movies
+              if (idx >= 4) {
+                box.classList.add('hidden-tablet');
+              } else {
+                box.classList.remove('hidden-tablet');
+              }
+              box.classList.remove('hidden-mobile');
             } else {
-              box.classList.remove('hidden-mobile'); // Show visible movies
+              // Desktop: show all movies
+              box.classList.remove('hidden-mobile');
+              box.classList.remove('hidden-tablet');
             }
           }
         });

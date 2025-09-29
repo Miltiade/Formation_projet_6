@@ -1,48 +1,15 @@
-/* Hide modal header in desktop view, show only in mobile/tablet */
-.modal-header {
+/* =========================
+     RESPONSIVE MOVIE LIST LOGIC
+     ========================= */
+/* By default, hide movies with .hidden-mobile and .hidden-tablet classes. */
+.hidden-mobile {
+    display: none;
+}
+.hidden-tablet {
     display: none;
 }
 
-@media (max-width: 900px) {
-    .modal-header {
-        display: flex;
-        flex-direction: row;
-        align-items: center; /* Vertically center title and cross button */
-        justify-content: space-between; /* Place title left, cross right */
-        width: 100%;
-        padding-bottom: 0.5em;
-        /* No border-bottom: client requires no horizontal line in modal header. */
-        /* Beginners: flexbox ensures both elements are on the same line and centered vertically. */
-    }
-}
-/* Modal: single-column layout for mobile and tablet */
-@media (max-width: 900px) {
-    #modal-body {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 1.5em; /* Space between rows */
-    }
-    #modal-body table {
-        width: 100%;
-        margin: 0;
-        border-collapse: collapse;
-    }
-    #modal-body img {
-        display: block;
-        margin: 0 auto 1em auto;
-        max-width: 180px;
-        max-height: 220px;
-        object-fit: cover;
-    }
-    #modal-body td {
-        width: 100%;
-        padding: 0.5em 0;
-        text-align: left;
-        vertical-align: top;
-    }
-}
-/* Style 'Voir plus' button to match 'Fermer' button in modal */
+/* Style 'Voir plus' button */
 .voir-plus-btn {
     background-color: #d32f2f;      /* Same red as Fermer */
     color: #fff;                    /* White text */
@@ -60,137 +27,51 @@
 .voir-plus-btn:hover {
     background-color: #b71c1c;      /* Slightly darker on hover */
 }
-/* Stronger selector to ensure mobile hiding works */
-.movie-list-wrapper .movie.hidden-mobile {
-/* On tablet view (min-width: 600px and max-width: 900px), show movies with .hidden-mobile. */
-@media (min-width: 600px) and (max-width: 900px) {
-    .movie-list-wrapper .movie.hidden-mobile {
-        display: block !important; /* Show movies with .hidden-mobile on tablet */
-    }
-}
-/* Stronger selector to ensure tablet hiding works (same logic as .hidden-mobile) */
-.movie-list-wrapper .movie.hidden-tablet {
-    display: none !important; /* Hide movies with .hidden-tablet by default */
-}
+
+/* On desktop (900px and up): show all movies; hide "Voir plus" button */
 @media (min-width: 900px) {
-    .movie-list-wrapper .movie.hidden-tablet {
-        display: block !important; /* Show movies with .hidden-tablet on desktop */
-    }
-}
-.movie-list-section.expanded .movie-list-wrapper .movie.hidden-tablet {
-    display: block !important; /* Show all movies when expanded, regardless of device */
-}
-    display: none !important;
-}
-@media (min-width: 900px) {
-    .movie-list-wrapper .movie.hidden-mobile {
-        display: block !important;
-    }
-}
-.movie-list-section.expanded .movie-list-wrapper .movie.hidden-mobile {
-    display: block !important;
-}
-/* Hide extra movie boxes on mobile by default */
-.hidden-mobile {
-    display: none;
-}
-@media (min-width: 900px) {
-    .hidden-mobile {
+    .hidden-mobile,
+    .hidden-tablet {
         display: block;
     }
-}
-.movie-list-section.expanded .hidden-mobile {
-    display: block;
-}
-/* Modal window: images have square corners */
-.modal-content img {
-    border-radius: 0 !important;
-}
-/* =========================
-     GENRES MENU (AUTRES SECTION)
-     ========================= */
-/* Genre menu: horizontal, no bullets, clean spacing */
-.genre-list {
-    display: flex;
-    flex-wrap: wrap;              /* Allows wrapping on small screens */
-    gap: 0.5em;                   /* Space between buttons */
-    list-style: none;             /* Remove bullets */
-    padding: 0;
-    margin: 1em 0;
-    justify-content: flex-start;  /* Align left, or use center if you prefer */
-}
-
-/* Genre buttons: pill-shaped, modern look */
-.genre-select {
-    background: #f0f0f0;
-    color: #333;
-    border: none;
-    border-radius: 999px;         /* Fully rounded sides */
-    padding: 0.5em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-    outline: none;
-}
-
-.genre-select:hover,
-.genre-select:focus {
-    background: #333;
-    color: #fff;
-}
-
-
-
-/* =========================
-/* Hide 'Voir plus' button on desktop (min-width: 900px) for all movie sections */
-@media (min-width: 900px) {
     .voir-plus-btn {
         display: none;
     }
 }
-   /* RESPONSIVE MOVIE LIST LOGIC */
-   /* ========================= */
-/* These classes are used to hide extra movies in each section by default. */
-/* Only the first 2 movies are shown on mobile, first 4 on tablet, all 6 on desktop. */
-.hidden-mobile {
-    display: none; /* Hide on mobile by default */
+
+/* On tablet (600px–899px): show all movies except those with .hidden-tablet. Center "Voir plus" button */
+@media (min-width: 600px) and (max-width: 899px) {
+    .hidden-mobile {
+        display: block;
+    }
+    .hidden-tablet {
+        display: none;
+    }
+    .voir-plus-btn {
+        grid-column: 1 / span 2; /* Button spans both columns */
+        justify-self: center; /* Centers the button in its grid cell */
+        margin: 0;            /* Remove extra margin if needed */
+    }
 }
-.hidden-tablet {
-    display: none; /* Hide by default, but only for tablet view via media query below */
+
+/* On mobile (max 599px): show only movies without .hidden-mobile */
+@media (max-width: 599px) {
+    .hidden-mobile {
+        display: none !important; /* Force hiding on mobile */
+    }
+    .hidden-tablet {
+        display: block;
+    }
 }
-/* When the section has the 'expanded' class, show all movies regardless of device. */
+/* When 'Voir plus' button is clicked: show all movies */
 .movie-list-section.expanded .hidden-mobile,
 .movie-list-section.expanded .hidden-tablet {
     display: block;
 }
-/* On tablet ONLY (min-width: 600px and max-width: 900px), hide movies with .hidden-tablet. */
-@media (min-width: 600px) and (max-width: 900px) {
-    .hidden-tablet {
-        display: none;
-    }
-}
-/* On mobile (max-width: 600px), show movies with .hidden-tablet. */
-@media (max-width: 600px) {
-    .hidden-tablet {
-        display: block;
-    }
-}
-/* On desktop (min-width: 900px), show movies with .hidden-tablet. */
-@media (min-width: 900px) {
-    .hidden-tablet {
-        display: block;
-    }
-}
-/* On desktop (min-width: 900px), show movies hidden by .hidden-mobile */
-@media (min-width: 900px) {
-    .hidden-mobile {
-        display: block;
-    }
-}
 /* =========================
    END RESPONSIVE MOVIE LIST LOGIC
 /* =========================
+
 
 
 /* =========================
@@ -216,35 +97,18 @@ body {
     margin: 0 auto; /* Center the page horizontally in the browser window */
 }
 
-/* On mobile devices (max-width: 480px), center all content and text. */
-@media (max-width: 900px) {
+/* On mobile devices (max-width: 899px), center all content and text. */
+@media (max-width: 899px) {
     /* Always keep horizontal margin on mobile/tablet, as on desktop. */
-    body {
+    body, section, .movie-list-wrapper {
         max-width: 900px;
         margin-left: 3em;
         margin-right: 3em;
-        /* Beginners: margin keeps content away from screen edges. Doubled for more space. */
-        width: auto;
-    }
-    section {
-        max-width: 900px;
-        margin-left: 3em;
-        margin-right: 3em;
-        /* Add margin to all sections for consistent spacing. Doubled for more space. */
-        width: auto;
-    }
-    .movie-list-wrapper {
-        max-width: 900px;
-        margin-left: 3em;
-        margin-right: 3em;
-        /* Add margin to movie grid for consistent spacing. Doubled for more space. */
         width: auto;
     }
 }
-
-
 /* =========================
-   END GLOBAL STYLES
+   END GLOBAL STYLES AND RESETS
    ========================= */
 
 
@@ -293,7 +157,6 @@ header {
         display: none !important;    /* Hide other header elements */
     }
 }
-
 /* =========================
    END HEADER STYLES
    ========================= */
@@ -323,17 +186,21 @@ section {
     width: 100%;           /* Fill available width up to max-width */
 }
 
-/* Mobile: show only 1 column in movie lists (2 visible boxes, rest hidden by .hidden-mobile) */
+/* Mobile: show only 1 column in movie lists */
 @media (max-width: 480px) {
     .movie-list-wrapper {
         grid-template-columns: 1fr;      /* Only 1 column */
         grid-template-rows: repeat(2, 1fr); /* 2 rows for 2 movies */
         gap: 1.2rem;                     /* Slightly smaller gap for mobile */
-        /* Removed min-width and max-width so margins are respected. */
-        /* Beginners: This allows left/right margin to show on mobile/tablet. */
     }
 }
 
+/* Tablet: show only 2 columns in movie lists */
+@media (min-width: 600px) and (max-width: 899px) {
+    .movie-list-wrapper {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablet */
+    }
+}
 
 /* =========================
     END SECTION STYLES
@@ -425,32 +292,84 @@ margin-right: 0;          /* No extra space on the right */
     border-radius: 5px;
 }
 
-/* Title styling for best-movie (top right) */
-.best-movie-title {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    text-align: left;
-    align-self: start;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+@media (max-width: 600px) {
+  .best-movie-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .col1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #best-movie-image {
+    width: 100%;      /* Image fills the container horizontally */
+    height: auto;     /* Aspect ratio is preserved */
+    max-width: none;  /* Remove any previous max-width restriction */
+    display: block;   /* Ensures margin and width work as expected */
+  }
 }
 
-/* Details styling for best-movie (middle right) */
-.best-movie-details {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    align-self: start;
-    margin-bottom: 0.5rem;
+@media (max-width: 600px) {
+  .best-movie-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5em;
+    min-width: 100%;
+    max-width: 100%;
+    border-width: 5px;           /* Thicker border */
+    border-radius: 0;            /* Sharp corners */
+  }
+  .best-movie-image {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .best-movie-image img {
+    width: 100%;                 /* Fully stretch image to container width */
+    height: auto;
+    max-height: none;            /* Remove max-height restriction */
+    object-fit: fill;            /* Stretch image to fill container */
+    border-radius: 0;            /* Sharp corners for image */
+  }
+    .best-movie-title {
+        grid-column: auto;
+        grid-row: auto;
+        text-align: left;            /* Align title left in mobile view */
+        align-self: flex-start;      /* Align to start of flex container */
+        width: 100%;
+        font-size: 1.1em;
+        font-weight: bold;           /* Make title bold in mobile view */
+        margin: 0;                   /* Remove any margin for flush alignment */
+        /* This ensures the best movie title is bold and left-aligned only on mobile. */
+    }
+  .best-movie-details {
+    grid-column: auto;
+    grid-row: auto;
+    text-align: justify;         /* Justify details text */
+    align-self: center;
+    width: 100%;
+  }
+  .best-movie-actions {
+    grid-column: auto;
+    grid-row: auto;
+    text-align: center;
+    align-self: center;
+    width: 100%;
+  }
+  .movie-details-button {
+    width: 90%;
+    font-size: 1em;
+    margin: 0.5em auto;
+  }
 }
-
-/* Button styling for best-movie (bottom right) */
-.best-movie-actions {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-    align-self: end;
-    justify-self: end;
-}
+/* =========================
+   END BEST MOVIE SECTION
+   ========================= */
 
 /* =========================
    BEST RATED MOVIES GRID
@@ -466,6 +385,66 @@ margin-right: 0;          /* No extra space on the right */
     height: 570px; /* 2 x movie-box height + gap; adjust as needed */
     align-items: stretch;
 }
+
+/* Tablet: 2 columns for better layout */
+@media (min-width: 600px) and (max-width: 899px) {
+    .best-rated-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablet */
+    }
+}
+
+/* Mobile: 1 column for vertical stacking */
+@media (max-width: 480px) {
+    .best-rated-container {
+        grid-template-columns: 1fr;      /* Only 1 column */
+        grid-template-rows: repeat(2, 1fr); /* 2 rows for 2 movies */
+        gap: 1.2rem;                     /* Slightly smaller gap for mobile */
+    }
+}
+/* =========================
+    END BEST RATED MOVIES GRID
+    ========================= */
+
+
+/* =========================
+     GENRES MENU (AUTRES SECTION)
+     ========================= */
+
+/* Genre menu: horizontal, no bullets, clean spacing */
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;              /* Allows wrapping on small screens */
+    gap: 0.5em;                   /* Space between buttons */
+    list-style: none;             /* Remove bullets */
+    padding: 0;
+    margin: 1em 0;
+    justify-content: flex-start;  /* Align left, or use center if you prefer */
+}
+
+/* Genre buttons: pill-shaped, modern look */
+.genre-select {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 999px;         /* Fully rounded sides */
+    padding: 0.5em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    outline: none;
+}
+
+.genre-select:hover,
+.genre-select:focus {
+    background: #333;
+    color: #fff;
+}
+
+/* =========================
+    END GENRES MENU (AUTRES SECTION)
+    ========================= */
+
 
 /* =========================
    GENERAL IMAGE STYLES
@@ -588,6 +567,9 @@ h1, h2 {
     cursor: pointer;
     transition: background 0.2s;
 }
+/* =========================
+    END MOVIE BOXES STYLE
+    ========================= */
 
 
 /* Modal styles */
@@ -607,12 +589,12 @@ h1, h2 {
   justify-content: center;
 }
 
-/* Modal content box: centered, white background, rounded corners */
+/* Modal content box: centered, white background */
 .modal-content {
   background: #fff; /* White background */
   padding: 2em; /* Space inside modal */
     border-radius: 0; /* Squared corners */
-        max-width: 750px; /* Maximum width (50% wider) */
+        max-width: 400px; /* Maximum width (50% wider) */
         width: auto; /* Let content define width, up to max-width */
   /* Add a thick black border */
     border: 5.3px solid #000;
@@ -627,44 +609,6 @@ h1, h2 {
 /* Close button: positioned in the bottom center of modal (desktop only) */
 .modal-close {
     position: static;
-/* =========================
-   RESPONSIVE MOVIE LIST LOGIC (STRONG SELECTORS ONLY)
-   ========================= */
-/* Beginners: Only the first 2 movies are shown on mobile, first 4 on tablet, all 6 on desktop. */
-/* We use strong selectors and !important to ensure correct visibility. */
-
-/* Hide extra movies on mobile by default (strong selector) */
-.movie-list-wrapper .movie.hidden-mobile {
-    display: none !important;
-}
-/* Hide extra movies on tablet by default (strong selector) */
-.movie-list-wrapper .movie.hidden-tablet {
-    display: none !important;
-}
-/* Show movies with .hidden-mobile on tablet (600px–900px) */
-@media (min-width: 600px) and (max-width: 900px) {
-    .movie-list-wrapper .movie.hidden-mobile {
-        display: block !important;
-    }
-    .movie-list-wrapper .movie.hidden-tablet {
-        display: none !important;
-    }
-}
-/* Show all movies on desktop (≥900px) */
-@media (min-width: 900px) {
-    .movie-list-wrapper .movie.hidden-mobile,
-    .movie-list-wrapper .movie.hidden-tablet {
-        display: block !important;
-    }
-}
-/* When the section is expanded, show all movies regardless of device */
-.movie-list-section.expanded .movie-list-wrapper .movie.hidden-mobile,
-.movie-list-section.expanded .movie-list-wrapper .movie.hidden-tablet {
-    display: block !important;
-}
-/* =========================
-   END RESPONSIVE MOVIE LIST LOGIC
-   ========================= */
     margin-top: 2.5em;
     border-radius: 999px;
     margin-bottom: 1em;
@@ -739,60 +683,56 @@ h1, h2 {
     }
 }
 
+/* Hide modal header in desktop view, show only in mobile/tablet */
+.modal-header {
+    display: none;
+}
 
-/* Responsive layout for 'Meilleur film' (Best Movie) section on mobile phones
-   Adjusted: thicker sharp border, image fully stretched, centered title, justified details */
-@media (max-width: 600px) {
-    .best-movie-container {
+@media (max-width: 900px) {
+    .modal-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* Vertically center title and cross button */
+        justify-content: space-between; /* Place title left, cross right */
+        width: 100%;
+        padding-bottom: 0.5em;
+        /* No border-bottom: client requires no horizontal line in modal header. */
+        /* Beginners: flexbox ensures both elements are on the same line and centered vertically. */
+    }
+}
+/* Modal: single-column layout for mobile and tablet */
+@media (max-width: 900px) {
+    #modal-body {
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        padding: 0.5em;
-        min-width: 100%;
-        max-width: 100%;
-        border-width: 5px;           /* Thicker border */
-        border-radius: 0;            /* Sharp corners */
+        gap: 1.5em; /* Space between rows */
     }
-    .best-movie-image {
+    #modal-body table {
         width: 100%;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 1em;
-        grid-column: auto;
-        grid-row: auto;
+        margin: 0;
+        border-collapse: collapse;
     }
-    .best-movie-image img {
-        width: 100%;                 /* Fully stretch image to container width */
-        height: auto;
-        max-height: none;            /* Remove max-height restriction */
-        object-fit: fill;            /* Stretch image to fill container */
-        border-radius: 0;            /* Sharp corners for image */
+    #modal-body img {
+        display: block;
+        margin: 0 auto 1em auto;
+        max-width: 180px;
+        max-height: 220px;
+        object-fit: cover;
     }
-    .best-movie-title {
-        grid-column: auto;
-        grid-row: auto;
-        text-align: center;          /* Center title horizontally */
-        align-self: center;
+    #modal-body td {
         width: 100%;
-        font-size: 1.1em;
-    }
-    .best-movie-details {
-        grid-column: auto;
-        grid-row: auto;
-        text-align: justify;         /* Justify details text */
-        align-self: center;
-        width: 100%;
-    }
-    .best-movie-actions {
-        grid-column: auto;
-        grid-row: auto;
-        text-align: center;
-        align-self: center;
-        width: 100%;
-    }
-    .movie-details-button {
-        width: 90%;
-        font-size: 1em;
-        margin: 0.5em auto;
+        padding: 0.5em 0;
+        text-align: left;
+        vertical-align: top;
     }
 }
+
+/* Modal window: images have square corners */
+.modal-content img {
+    border-radius: 0 !important;
+}
+
+/* =========================
+   END MODAL STYLES
+   ========================= */
