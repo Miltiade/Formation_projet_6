@@ -74,6 +74,7 @@ function renderMoviesWithVoirPlus(container, movies, sectionClass) {
 
   // Loop through each movie and create its box
   movies.forEach((movie, idx) => {
+    console.log(movie.title, movie.image_url);
     // Create a div for each movie
     const box = document.createElement('div');
     box.className = 'movie';
@@ -196,6 +197,7 @@ function displayCat2Movies(movies) {
 
 // --- Display best movie in the header section ---
 function displayBestMovie(movie) {
+    console.log('Displaying best movie:', movie.title, movie.image_url);
     // Select elements
     const img = document.getElementById('best-movie-image');
     const title = document.getElementById('best-movie-title');

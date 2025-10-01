@@ -45,7 +45,7 @@
         display: block;
     }
     .hidden-tablet {
-        display: none;
+        display: none !important; /* Force hiding on tablet */
     }
     .voir-plus-btn {
         grid-column: 1 / span 2; /* Button spans both columns */
@@ -214,6 +214,11 @@ section {
     display: flex;
     flex-direction: column;
 }
+
+.best-movie-title {
+    font-size: 1.5em;
+    font-weight: bold; /* Make the title bold in all views */
+    }
 
 /* Breakpoint for mobile phones */
 @media (max-width: 480px) {
