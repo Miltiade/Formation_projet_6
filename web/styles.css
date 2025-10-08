@@ -682,7 +682,6 @@ h1, h2 {
 @media (max-width: 480px) {
     .modal-content {
         display: grid;
-        align-items: left;
         text-align: left;
         padding: 1em; /* Less padding on mobile */
     }
