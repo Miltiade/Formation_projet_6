@@ -1,0 +1,35 @@
+# JustStreamIt
+
+A responsive web app for browsing and viewing movies, using a local REST API.
+
+## Features
+
+- **Best Movie**: Highlights the top-rated film with details and summary.
+- **Top Rated**: Shows the next 6 best-rated movies.
+- **Categories**: Displays best movies in "Mystery", "Action", and a user-selectable genre.
+- **Responsive Design**: Adapts to mobile, tablet, and desktop screens.
+- **Movie Details**: Click any movie for a modal with more info.
+- **No frameworks**: HTML, CSS, and vanilla JavaScript.
+
+## Getting Started
+
+1. **Clone the repo** and set up the [OCMovies-API-EN-FR-master](OCMovies-API-EN-FR-master/) backend (see its `README.md` for setup).
+2. Start the API server locally (default: `http://127.0.0.1:8000`).
+3. Open [web/index.html](web/index.html) in your browser.
+
+## Project Structure
+
+- `web/` — Front-end source (HTML, CSS, JS)
+- `OCMovies-API-EN-FR-master/` — Local API backend
+- `tech_specs/` — Client requirements and specs
+
+## Development
+
+- Edit [web/script.js](web/script.js) for JavaScript logic.
+- Edit [web/styles.css](web/styles.css) for styling.
+- Use only Bootstrap or Tailwind if a CSS framework is needed.
+- No JS frameworks or plugins allowed.
+
+## License
+
+MIT — see [LICENSE](LICENSE)
